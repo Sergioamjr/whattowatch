@@ -1,11 +1,12 @@
 import React from "react";
+import { Header } from "./styles";
 
-const Header = () => {
+const HeaderComponent = () => {
   return (
-    <header>
-      <p>HEader</p>
-    </header>
+    <Header role="banner">
+      <p>Header</p>
+    </Header>
   );
 };
 
-export default Header;
+export default HeaderComponent;
