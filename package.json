@@ -17,6 +17,12 @@
     "react-gsap": "^1.2.0",
     "styled-components": "^4.4.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "babel-core": "^6.26.3",
@@ -33,6 +39,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.0.7",
     "jest": "^24.9.0",
     "react-axe": "^3.3.0"
   }
