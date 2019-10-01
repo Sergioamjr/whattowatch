@@ -1,13 +1,19 @@
 import React from "react";
 import Layout from "../components/Layout/Layout";
+import styled from "styled-components";
+import { PLight, ColorLightCSS } from "../styles";
+
+const H1 = styled.h1`
+  ${ColorLightCSS}
+`;
 
 const Home = () => (
   <Layout>
-    <div className="hero">
-      <h1 className="title">Welcomes to Next.js!</h1>
-      <p className="description">
+    <div>
+      <H1 className="title">Welcomes </H1>
+      <PLight className="description">
         To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
+      </PLight>
     </div>
   </Layout>
 );

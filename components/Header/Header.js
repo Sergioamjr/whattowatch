@@ -1,10 +1,30 @@
 import React from "react";
-import { Header } from "./styles";
+import { Header, Grid, GridUL, A } from "./styles";
+import Link from "next/link";
+import { Container } from "../../styles";
 
 const HeaderComponent = () => {
   return (
     <Header role="banner">
-      <p>Header</p>
+      <Container>
+        <Grid>
+          <p>Header</p>
+          <nav>
+            <GridUL>
+              <li>
+                <Link href="/">
+                  <A>Home</A>
+                </Link>
+              </li>
+              <li>
+                <Link href="/movies">
+                  <A>Movies</A>
+                </Link>
+              </li>
+            </GridUL>
+          </nav>
+        </Grid>
+      </Container>
     </Header>
   );
 };
