@@ -13,6 +13,10 @@ export const AlignCenter = css`
   align-items: center;
 `;
 
+export const FlexWrap = css`
+  flex-wrap: wrap;
+`;
+
 export const ColorWhiteCSS = css`
   color: ${UI.color.white};
 `;
@@ -42,4 +46,43 @@ export const PLight = styled.p`
 
 export const BackgroundDarkTheme = styled.div`
   background: ${UI.color.darkTheme};
+`;
+
+export const Grid = styled.div`
+  ${DFlex}
+  ${JustifyBetween}
+  ${FlexWrap}
+  margin: 0 -15px;
+`;
+
+export const Row = styled.div`
+  box-sizing: border-box;
+  padding: 0 15px;
+  width: ${({ xs }) => (xs ? `${(xs / 12) * 100}%` : "100%")};
+  @media screen and (min-width: 768px) {
+    width: ${({ sm, xs }) =>
+      sm ? `${(sm / 12) * 100}%` : xs ? `${(xs / 12) * 100}%` : "100%"};
+  }
+  @media screen and (min-width: 992px) {
+    width: ${({ md, sm, xs }) =>
+      md
+        ? `${(md / 12) * 100}%`
+        : sm
+        ? `${(sm / 12) * 100}%`
+        : xs
+        ? `${(xs / 12) * 100}%`
+        : "100%"};
+  }
+  @media screen and (min-width: 1200px) {
+    width: ${({ lg, md, sm, xs }) =>
+      lg
+        ? `${(lg / 12) * 100}%`
+        : md
+        ? `${(md / 12) * 100}%`
+        : sm
+        ? `${(sm / 12) * 100}%`
+        : xs
+        ? `${(xs / 12) * 100}%`
+        : "100%"};
+  }
 `;

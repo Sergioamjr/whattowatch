@@ -12,6 +12,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Noto Sans', sans-serif;
     list-style-type: none;
   }
+  img {
+    max-width: 100%;
+  }
 `;
 
 class MyApp extends App {

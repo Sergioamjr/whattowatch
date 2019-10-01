@@ -19,6 +19,7 @@ export const Grid = styled.div`
   ${AlignCenter}
   height: 100%
 `;
+
 export const GridUL = styled.ul`
   ${DFlex}
   ${JustifyBetween}

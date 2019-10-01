@@ -19,6 +19,7 @@
   },
   "plugins": ["react"],
   "rules": {
+    "camelcase": ["error", { "properties": "never" }],
     "react/prop-types": [2, { "ignore": ["children"] }],
     "quotes": [2, "double", { "avoidEscape": true }],
     "semi": ["error", "always"]
