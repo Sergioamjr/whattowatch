@@ -8,5 +8,6 @@ module.exports = {
   verbose: true,
   coveragePathIgnorePatterns: ["/node_modules/", "enzyme.js"],
   setupFilesAfterEnv: ["<rootDir>/enzyme.js"],
-  transformIgnorePatterns: ["<rootDir>/node_modules/"]
+  transformIgnorePatterns: ["<rootDir>/node_modules/"],
+  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/cypress/"]
 };
