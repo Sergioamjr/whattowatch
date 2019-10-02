@@ -6,8 +6,8 @@ module.exports = {
     "^.+\\.[t|j]sx?$": "babel-jest"
   },
   verbose: true,
-  coveragePathIgnorePatterns: ["/node_modules/", "enzyme.js"],
-  setupFilesAfterEnv: ["<rootDir>/enzyme.js"],
+  coveragePathIgnorePatterns: ["/node_modules/"],
+  // setupFilesAfterEnv: ["<rootDir>/enzyme.js"],
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/cypress/"]
 };
