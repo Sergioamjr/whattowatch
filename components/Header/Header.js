@@ -8,7 +8,7 @@ const HeaderComponent = () => {
     <Header role="banner">
       <Container>
         <Grid>
-          <p>Header</p>
+          <h1>MovieMmendation</h1>
           <nav>
             <GridUL>
               <li>

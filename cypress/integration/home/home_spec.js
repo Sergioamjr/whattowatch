@@ -4,9 +4,17 @@ describe("My First Test", () => {
     expect(true).to.equal(true);
   });
 
-  it("should visit home", () => {
+  it("Should visit home", () => {
     cy.visit("http://localhost:3000/");
     cy.contains("Welcomes");
+  });
+
+  it("Should render header correctly", () => {
+    cy.visit("http://localhost:3000/");
+    cy.contains("header h1", "MovieMmendation");
+    cy.get("header nav li").should("have.length", 2);
+    cy.contains("header nav li a", "Home");
+    cy.contains("header nav li a", "Movie");
   });
 
   it("Should render list of movies", () => {

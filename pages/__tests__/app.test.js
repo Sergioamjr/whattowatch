@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "@testing-library/react";
-import Home from "./pages/index.js";
+import Home from "./../index";
 import "@testing-library/jest-dom/extend-expect";
 
 describe("App", () => {
