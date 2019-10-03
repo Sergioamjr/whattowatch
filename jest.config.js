@@ -6,7 +6,6 @@ module.exports = {
     "^.+\\.[t|j]sx?$": "babel-jest"
   },
   verbose: true,
-  collectCoverage: true,
   collectCoverageFrom: [
     "**/*.{js,jsx}",
     "!**/node_modules/**",
