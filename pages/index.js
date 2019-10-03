@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout/Layout";
 import styled from "styled-components";
 import { ColorLightCSS, Grid, Row } from "../styles";
-import { getMovies } from "../services";
+import { fetchMovies } from "../services";
 import ShowItem from "../components/ShowItem/ShowItem";
 
 const H1 = styled.h1`
@@ -13,8 +13,12 @@ const Home = () => {
   const [movies, setMovies] = React.useState([]);
 
   React.useEffect(() => {
-    const movies = getMovies();
     setMovies(movies);
+    const fetchMovies_ = async () => {
+      const movies = await fetchMovies();
+      setMovies(movies);
+    };
+    fetchMovies_();
   }, []);
 
   return (
