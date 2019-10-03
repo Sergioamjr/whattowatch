@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout/Layout";
 import styled from "styled-components";
-import { PLight, ColorLightCSS, Grid, Row } from "../styles";
+import { ColorLightCSS, Grid, Row } from "../styles";
 import { getMovies } from "../services";
 import ShowItem from "../components/ShowItem/ShowItem";
 
@@ -23,9 +23,6 @@ const Home = () => {
         <H1 className="title" data-testid="title">
           Welcomes
         </H1>
-        <PLight className="description">
-          To get started, edit <code>pages/index.js</code> and save to reload.
-        </PLight>
         <Grid>
           {movies.map((movie, index) => (
             <Row key={index} xs={12} sm={6} md={4} lg={3}>

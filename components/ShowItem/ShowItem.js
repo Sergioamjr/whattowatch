@@ -26,7 +26,7 @@ const Score = styled.div`
 const ShowItem = props => {
   const { title, popularity, poster_path } = props;
   return (
-    <Div>
+    <Div className="show-item" data-test-id="test-example">
       <Score>{popularity.toFixed()}</Score>
       <img
         alt={`${title} poster show`}
