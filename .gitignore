@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .nyc_output
+.history
 
 # testing
 /coverage
