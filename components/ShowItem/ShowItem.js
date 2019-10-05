@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React from "react";
 import PropTypes from "prop-types";
-import { PLight } from "../../styles";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -32,7 +31,7 @@ const ShowItem = props => {
         alt={`${title} poster show`}
         src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
       />
-      <PLight>{title}</PLight>
+      <p>{title}</p>
     </Div>
   );
 };

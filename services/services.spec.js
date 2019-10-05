@@ -1,9 +1,10 @@
 import { fetchMovies } from ".";
 import { MockMovies } from "./__mocks__/apiResponse";
+jest.mock(".");
 
 describe("Services", () => {
-  it("should return true", () => {
-    expect(true).toBe(true);
+  beforeAll(() => {
+    fetchMovies.mockResolvedValue(MockMovies.results);
   });
 
   it("should test return api", async () => {

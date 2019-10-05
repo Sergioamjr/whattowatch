@@ -6,7 +6,7 @@ describe("My First Test", () => {
 
   it("Should visit home", () => {
     cy.visit("http://localhost:3000/");
-    cy.contains("Welcomes");
+    cy.contains("Lasts movies");
   });
 
   it("Should render header correctly", () => {
