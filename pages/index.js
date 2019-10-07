@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout/Layout";
 import styled from "styled-components";
+import Link from "next/link";
 import { Grid, Row } from "../styles";
 import { fetchMovies, fetchMoviesGenres } from "../services";
 import ShowItem from "../components/ShowItem/ShowItem";
@@ -60,7 +61,7 @@ const Home = () => {
             <CategoriesLists>
               {genres.map(({ id, name }) => (
                 <CategoriesItem key={id}>
-                  <a href="/#">{name}</a>
+                  <Link href={`/genrer/${id}`}>{name}</Link>
                 </CategoriesItem>
               ))}
             </CategoriesLists>

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server/index.js",
+    "dev": "next",
     "build": "next build",
-    "start": "NODE_ENV=production node server/index.js",
+    "start": "next start",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "npm run test --coverage",
