@@ -15,6 +15,10 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <link
+            href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap"
+            rel="stylesheet"
+          ></link>
         </body>
       </Html>
     );
