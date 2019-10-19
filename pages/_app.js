@@ -18,16 +18,6 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
-
   componentDidMount = () => {
     if (process.env.NODE_ENV !== "production") {
       const axe = require("react-axe");

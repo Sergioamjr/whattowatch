@@ -6,7 +6,6 @@
 .pnp.js
 .nyc_output
 .history
-.next
 
 # testing
 /coverage

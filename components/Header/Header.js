@@ -1,6 +1,6 @@
 import React from "react";
 import { Header, Grid, GridUL, A } from "./styles";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import Link from "next/link";
 import { Container } from "../../styles";
 
@@ -14,26 +14,12 @@ const HeaderComponent = props => {
             <GridUL>
               <li>
                 <Link href="/">
-                  <A
-                    onClick={e => {
-                      console.log(props);
-                      console.log("click");
-                      props.setInProp && props.setInProp();
-                    }}
-                  >
-                    Home
-                  </A>
+                  <A>Home</A>
                 </Link>
               </li>
               <li>
                 <Link href="/movies">
-                  <A
-                    onClick={e => {
-                      props.setInProp && props.setInProp();
-                    }}
-                  >
-                    Movies
-                  </A>
+                  <A>Movies</A>
                 </Link>
               </li>
             </GridUL>
@@ -42,10 +28,6 @@ const HeaderComponent = props => {
       </Container>
     </Header>
   );
-};
-
-HeaderComponent.propTypes = {
-  setInProp: PropTypes.func
 };
 
 export default HeaderComponent;

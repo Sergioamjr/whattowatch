@@ -43,7 +43,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Layout setInProp={setInProp}>
+    <Layout>
       <Transition in={inProp} timeout={500}>
         {state => {
           return (

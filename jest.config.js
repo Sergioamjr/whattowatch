@@ -16,7 +16,13 @@ module.exports = {
     "!**/cypress/**",
     "!pages/_*.js"
   ],
+  setupFilesAfterEnv: [],
   coveragePathIgnorePatterns: ["/node_modules/"],
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
-  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/cypress/"]
+  testPathIgnorePatterns: [
+    "<rootDir>/node_modules/",
+    "<rootDir>/cypress/",
+    "<rootDir>/.next/",
+    "<rootDir>/.history/"
+  ]
 };

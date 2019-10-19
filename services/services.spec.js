@@ -1,5 +1,6 @@
 import { fetchMovies } from ".";
 import { MockMovies } from "./__mocks__/apiResponse";
+import "@testing-library/jest-dom/extend-expect";
 jest.mock(".");
 
 describe("Services", () => {
