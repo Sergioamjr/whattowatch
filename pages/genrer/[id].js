@@ -1,35 +1,29 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
-import { fetchCustomData, fetchMoviesGenres } from "../../services";
+import PropTypes from "prop-types";
 import GenrerList from "../../components/GenrerList/GenrerList";
 import { Grid, Row } from "../../styles";
 import ShowItem from "../../components/ShowItem/ShowItem";
+import { AppContext } from "../_app";
+import {
+  returnGenrerName,
+  fetchMovieByGenrerId
+} from "../../utils/customHooks";
 
 const Genrer = props => {
-  const [movies, setMovies] = React.useState([]);
-  const [genres, setGenres] = React.useState([]);
-  React.useEffect(() => {
-    const fetch = async () => {
-      try {
-        const { id } = props;
-        const genres = await fetchMoviesGenres();
-        const { results } = await fetchCustomData(
-          "3/discover/movie",
-          `&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}`
-        );
-        setGenres(genres);
-        setMovies(results);
-      } catch (error) {}
-    };
-    fetch();
-  }, []);
+  const { id } = props;
+  const { genres } = React.useContext(AppContext);
+  const movies = fetchMovieByGenrerId(id);
+  const name = returnGenrerName(id);
 
   return (
     <Layout>
       <div className="hero">
-        <h1 className="title" data-testid="title">
-          Genresr
-        </h1>
+        {name && (
+          <h1 className="title" data-testid="title">
+            Genrer: {name}
+          </h1>
+        )}
         <GenrerList genres={genres} />
         <Grid>
           {movies.map((movie, index) => (
@@ -44,8 +38,12 @@ const Genrer = props => {
   );
 };
 
-Genrer.getInitialProps = router => {
-  return { ...router.query };
+Genrer.propTypes = {
+  id: PropTypes.string
+};
+
+Genrer.getInitialProps = ({ query }) => {
+  return query;
 };
 
 export default Genrer;

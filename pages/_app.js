@@ -5,6 +5,8 @@ import App from "next/app";
 import HeadComponent from "../components/Head/Head";
 
 import { createGlobalStyle } from "styled-components";
+import { fetchMoviesGenres } from "../services";
+
 const GlobalStyle = createGlobalStyle`
   * {
     padding: 0;
@@ -17,12 +19,22 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+export const AppContext = React.createContext({ genres: [] });
+
 class MyApp extends App {
-  componentDidMount = () => {
+  state = {
+    genres: []
+  };
+
+  componentDidMount = async () => {
     if (process.env.NODE_ENV !== "production") {
       const axe = require("react-axe");
       axe(React, ReactDOM, 1000);
     }
+    try {
+      const genres = await fetchMoviesGenres();
+      this.setState({ genres });
+    } catch (error) {}
   };
 
   render() {
@@ -31,7 +43,9 @@ class MyApp extends App {
       <>
         <GlobalStyle />
         <HeadComponent />
-        <Component {...pageProps} />
+        <AppContext.Provider value={this.state}>
+          <Component {...pageProps} />
+        </AppContext.Provider>
       </>
     );
   }

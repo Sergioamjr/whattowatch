@@ -32,7 +32,6 @@ const GenrerList = props => {
     <div>
       {props.genres.length > 0 && (
         <MBottom30>
-          <p>Genres</p>
           <CategoriesLists>
             {props.genres.map(({ id, name }) => (
               <CategoriesItem key={id}>
