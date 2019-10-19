@@ -71,3 +71,19 @@ export const fetchMovieByGenrerId = id => {
   }, []);
   return movies;
 };
+
+export const fetchAllMovies = () => {
+  const [inProp, setInProp] = React.useState(false);
+  const [movies, setMovies] = React.useState([]);
+
+  React.useEffect(() => {
+    setMovies(movies);
+    const fetchMovies_ = async () => {
+      const movies = await fetchMovies();
+      setMovies(movies);
+      setInProp(true);
+    };
+    fetchMovies_();
+  }, []);
+  return { inProp, movies };
+};

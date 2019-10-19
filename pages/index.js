@@ -3,10 +3,10 @@ import { Transition } from "react-transition-group";
 import Layout from "../components/Layout/Layout";
 import styled from "styled-components";
 import { Grid, Row } from "../styles";
-import { fetchMovies } from "../services";
 import ShowItem from "../components/ShowItem/ShowItem";
 import GenrerList from "../components/GenrerList/GenrerList";
 import { AppContext } from "./_app";
+import { fetchAllMovies } from "../utils/customHooks";
 
 const duration = 500;
 
@@ -28,18 +28,7 @@ const H1 = styled.h1`
 
 const Home = () => {
   const { genres } = React.useContext(AppContext);
-  const [inProp, setInProp] = React.useState(false);
-  const [movies, setMovies] = React.useState([]);
-
-  React.useEffect(() => {
-    setMovies(movies);
-    const fetchMovies_ = async () => {
-      const movies = await fetchMovies();
-      setMovies(movies);
-      setInProp(true);
-    };
-    fetchMovies_();
-  }, []);
+  const { inProp, movies } = fetchAllMovies();
 
   return (
     <Layout>
