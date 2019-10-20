@@ -8,6 +8,7 @@ import genericImg from "./../../static/download.png";
 
 const Div = styled.div`
   margin-bottom: 40px;
+  overflow: hidden;
   position: relative;
   margin-right: 20px;
   border: 1px solid #d4d4d4;
@@ -45,6 +46,10 @@ const WrapperIcons = styled.div`
 
 const P = styled.p`
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 15px;
 `;
 
 const ShowItem = props => {

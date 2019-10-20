@@ -8,9 +8,11 @@ const formatResponse = response => {
   return results;
 };
 
-export const fetchMovies = () => {
+export const fetchMovies = page => {
   return axios
-    .get(`${baseURL}/3/discover/movie?sort_by=popularity.desc&api_key=${key}`)
+    .get(
+      `${baseURL}/3/discover/movie?include_adult=false&api_key=${key}&page=${page}`
+    )
     .then(formatResponse);
 };
 
