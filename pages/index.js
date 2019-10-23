@@ -3,11 +3,11 @@ import { Transition } from "react-transition-group";
 import InfiniteScroll from "react-infinite-scroller";
 import Layout from "../components/Layout/Layout";
 import styled from "styled-components";
-import { Grid, Row } from "../styles";
+import { Row } from "../styles";
 import ShowItem from "../components/ShowItem/ShowItem";
 import GenrerList from "../components/GenrerList/GenrerList";
 import { AppContext } from "./_app";
-import { fetchAllMovies } from "../utils/customHooks";
+import { fetchMovies } from "../services";
 
 const duration = 500;
 
@@ -32,20 +32,30 @@ const Loading = styled.div`
   background: red;
 `;
 
+const ScrollWraper = styled(InfiniteScroll)`
+  flex-wrap: wrap;
+  margin: 0 -15px;
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Home = () => {
   const [page, setPage] = React.useState(1);
   const { genres } = React.useContext(AppContext);
-  const { inProp, movies, isLoading } = fetchAllMovies(page);
+  const [movies_, setMovies_] = React.useState([]);
+  // const { inProp } = fetchAllMovies(page);
 
-  const fetchMore = f => {
-    if (!isLoading) {
+  const fetchMore = async f => {
+    try {
+      const newMovies = await fetchMovies(page);
+      setMovies_(movies_.concat(newMovies));
       setPage(page + 1);
-    }
+    } catch (error) {}
   };
 
   return (
     <Layout>
-      <Transition in={inProp} timeout={500}>
+      <Transition in={true} timeout={500}>
         {state => {
           return (
             <div
@@ -60,21 +70,29 @@ const Home = () => {
                 </H1>
                 <GenrerList genres={genres} />
                 <div style={{ height: 700, overflow: "auto" }}>
-                  <InfiniteScroll
+                  <ScrollWraper
                     pageStart={0}
                     loadMore={fetchMore}
-                    hasMore={page < 499 || isLoading}
+                    hasMore={page < 499}
                     loader={<Loading key={0}>Loading ...</Loading>}
                     useWindow={false}
                   >
-                    <Grid>
-                      {movies.map((movie, index) => (
-                        <Row key={index} xs={12} sm={6} md={4} lg={3}>
+                    {movies_
+                      .sort((a, b) => {
+                        if (a.popularity > b.popularity) {
+                          return -1;
+                        }
+                        if (a.popularity < b.popularity) {
+                          return 1;
+                        }
+                        return 0;
+                      })
+                      .map((movie, index) => (
+                        <Row key={index} xs={12} sm={4} md={3} lg={2}>
                           <ShowItem {...movie} />
                         </Row>
                       ))}
-                    </Grid>
-                  </InfiniteScroll>
+                  </ScrollWraper>
                 </div>
               </div>
             </div>
