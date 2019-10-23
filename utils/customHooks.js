@@ -68,7 +68,7 @@ export const fetchMovieByGenrerId = id => {
       } catch (error) {}
     };
     fetch();
-  }, []);
+  }, [id]);
   return movies;
 };
 

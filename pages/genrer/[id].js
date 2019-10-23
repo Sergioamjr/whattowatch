@@ -1,6 +1,7 @@
 import React from "react";
+import { useRouter } from "next/router";
+import _get from "lodash/get";
 import Layout from "../../components/Layout/Layout";
-import PropTypes from "prop-types";
 import GenrerList from "../../components/GenrerList/GenrerList";
 import { Grid, Row } from "../../styles";
 import ShowItem from "../../components/ShowItem/ShowItem";
@@ -11,7 +12,8 @@ import {
 } from "../../utils/customHooks";
 
 const Genrer = props => {
-  const { id } = props;
+  const router = useRouter();
+  const id = _get(router, "query.id");
   const { genres } = React.useContext(AppContext);
   const movies = fetchMovieByGenrerId(id);
   const name = returnGenrerName(id);
@@ -36,14 +38,6 @@ const Genrer = props => {
       </div>
     </Layout>
   );
-};
-
-Genrer.propTypes = {
-  id: PropTypes.string
-};
-
-Genrer.getInitialProps = ({ query }) => {
-  return query;
 };
 
 export default Genrer;

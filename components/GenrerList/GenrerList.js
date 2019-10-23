@@ -35,7 +35,7 @@ const GenrerList = props => {
           <CategoriesLists>
             {props.genres.map(({ id, name }) => (
               <CategoriesItem key={id}>
-                <Link href={`/genrer/${id}`}>
+                <Link href="/genrer/[id]" as={`/genrer/${id}`}>
                   <a>{name}</a>
                 </Link>
               </CategoriesItem>
