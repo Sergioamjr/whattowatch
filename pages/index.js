@@ -1,13 +1,11 @@
 import React from "react";
 import { Transition } from "react-transition-group";
-import InfiniteScroll from "react-infinite-scroller";
 import Layout from "../components/Layout/Layout";
 import styled from "styled-components";
-import { Row } from "../styles";
-import ShowItem from "../components/ShowItem/ShowItem";
 import GenrerList from "../components/GenrerList/GenrerList";
 import { AppContext } from "./_app";
 import { fetchMovies } from "../services";
+import DynamicInfiniteScroll from "../components/InfiniteScroll";
 
 const duration = 500;
 
@@ -25,18 +23,6 @@ const transitionStyles = {
 
 const H1 = styled.h1`
   margin-bottom: 30px;
-`;
-
-const Loading = styled.div`
-  height: 400px;
-  background: red;
-`;
-
-const ScrollWraper = styled(InfiniteScroll)`
-  flex-wrap: wrap;
-  margin: 0 -15px;
-  display: flex;
-  justify-content: space-between;
 `;
 
 const Home = () => {
@@ -69,31 +55,21 @@ const Home = () => {
                   Lasts movies
                 </H1>
                 <GenrerList genres={genres} />
-                <div style={{ height: 700, overflow: "auto" }}>
-                  <ScrollWraper
-                    pageStart={0}
-                    loadMore={fetchMore}
-                    hasMore={page < 499}
-                    loader={<Loading key={0}>Loading ...</Loading>}
-                    useWindow={false}
-                  >
-                    {movies_
-                      .sort((a, b) => {
-                        if (a.popularity > b.popularity) {
-                          return -1;
-                        }
-                        if (a.popularity < b.popularity) {
-                          return 1;
-                        }
-                        return 0;
-                      })
-                      .map((movie, index) => (
-                        <Row key={index} xs={12} sm={4} md={3} lg={2}>
-                          <ShowItem {...movie} />
-                        </Row>
-                      ))}
-                  </ScrollWraper>
-                </div>
+                <DynamicInfiniteScroll
+                  config={{
+                    loadMore: fetchMore,
+                    hasMore: page < 499
+                  }}
+                  items={movies_.sort((a, b) => {
+                    if (a.popularity > b.popularity) {
+                      return -1;
+                    }
+                    if (a.popularity < b.popularity) {
+                      return 1;
+                    }
+                    return 0;
+                  })}
+                />
               </div>
             </div>
           );
