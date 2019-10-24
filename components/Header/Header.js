@@ -1,8 +1,13 @@
 import React from "react";
 import { Header, Grid, GridUL, A } from "./styles";
 // import PropTypes from "prop-types";
+import styled from "styled-components";
 import Link from "next/link";
 import { Container } from "../../styles";
+
+const MLeft10 = styled(A)`
+  margin-left: 10px;
+`;
 
 const HeaderComponent = props => {
   return (
@@ -13,13 +18,18 @@ const HeaderComponent = props => {
           <nav>
             <GridUL>
               <li>
-                <Link href="/">
-                  <A>Home</A>
+                <Link style={{ marginLeft: 10 }} href="/">
+                  <MLeft10>Home</MLeft10>
                 </Link>
               </li>
               <li>
-                <Link href="/movies">
-                  <A>Movies</A>
+                <Link style={{ marginLeft: 10 }} href="/movies">
+                  <MLeft10>Movies</MLeft10>
+                </Link>
+              </li>
+              <li>
+                <Link style={{ marginLeft: 10 }} href="/recommendation">
+                  <MLeft10>Recomendation</MLeft10>
                 </Link>
               </li>
             </GridUL>

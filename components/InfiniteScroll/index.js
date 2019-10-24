@@ -21,11 +21,21 @@ const DynamicInfiniteScroll = props => {
         pageStart={0}
         {...props.config}
       >
-        {props.items.map((movie, index) => (
-          <Row key={index} xs={12} sm={4} md={3} lg={2}>
-            <ShowItem {...movie} />
-          </Row>
-        ))}
+        {props.items
+          .sort((a, b) => {
+            if (a.popularity > b.popularity) {
+              return -1;
+            }
+            if (a.popularity < b.popularity) {
+              return 1;
+            }
+            return 0;
+          })
+          .map((movie, index) => (
+            <Row key={index} xs={12} sm={4} md={3} lg={2}>
+              <ShowItem {...movie} />
+            </Row>
+          ))}
       </ScrollWraper>
     </div>
   );

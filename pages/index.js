@@ -36,15 +36,7 @@ const Home = () => {
             loadMore: fetchMore,
             hasMore: page < 499
           }}
-          items={movies_.sort((a, b) => {
-            if (a.popularity > b.popularity) {
-              return -1;
-            }
-            if (a.popularity < b.popularity) {
-              return 1;
-            }
-            return 0;
-          })}
+          items={movies_}
         />
       </div>
     </Layout>
