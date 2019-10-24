@@ -62,13 +62,17 @@ export const fetchMovieByGenrerId = id => {
       try {
         const { results } = await fetchCustomData(
           "3/discover/movie",
-          `&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}`
+          {
+            with_genres: id,
+            page: 1
+          }
+          // `&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}`
         );
         setMovies(results);
       } catch (error) {}
     };
     fetch();
-  }, [id]);
+  }, []);
   return movies;
 };
 

@@ -25,6 +25,11 @@ export const fetchMoviesGenres = () => {
 // https://api.themoviedb.org/3/discover/movie?api_key=a1dc06d0f8d65b34ac156d07fe333060&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=80
 export const fetchCustomData = (url, params) => {
   return axios
-    .get(`${baseURL}/${url}?api_key=${key}${params}`)
+    .get(`${baseURL}/${url}`, {
+      params: {
+        api_key: key,
+        ...params
+      }
+    })
     .then(({ data }) => data);
 };

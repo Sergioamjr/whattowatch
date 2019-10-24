@@ -32,6 +32,7 @@ const Home = () => {
   // const { inProp } = fetchAllMovies(page);
 
   const fetchMore = async f => {
+    console.log("fetch");
     try {
       const newMovies = await fetchMovies(page);
       setMovies_(movies_.concat(newMovies));

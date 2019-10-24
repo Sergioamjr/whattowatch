@@ -3,20 +3,41 @@ import { useRouter } from "next/router";
 import _get from "lodash/get";
 import Layout from "../../components/Layout/Layout";
 import GenrerList from "../../components/GenrerList/GenrerList";
-import { Grid, Row } from "../../styles";
-import ShowItem from "../../components/ShowItem/ShowItem";
 import { AppContext } from "../_app";
-import {
-  returnGenrerName,
-  fetchMovieByGenrerId
-} from "../../utils/customHooks";
+import { returnGenrerName } from "../../utils/customHooks";
+import DynamicInfiniteScroll from "../../components/InfiniteScroll";
+import { fetchCustomData } from "../../services";
 
 const Genrer = props => {
   const router = useRouter();
   const id = _get(router, "query.id");
+  const [totalPages, setTotalPages] = React.useState(0);
+  const [page, setPage] = React.useState(1);
+  const [items, setItems] = React.useState([]);
   const { genres } = React.useContext(AppContext);
-  const movies = fetchMovieByGenrerId(id);
   const name = returnGenrerName(id);
+
+  React.useEffect(() => {
+    setItems([]);
+    setPage(1);
+    setTotalPages(0);
+    fetchMore();
+  }, [id]);
+
+  const fetchMore = async f => {
+    try {
+      const { results, total_pages: totalPages } = await fetchCustomData(
+        "3/discover/movie",
+        {
+          with_genres: id,
+          page
+        }
+      );
+      setTotalPages(totalPages);
+      setItems(items.concat(results));
+      setPage(page + 1);
+    } catch (error) {}
+  };
 
   return (
     <Layout>
@@ -27,14 +48,10 @@ const Genrer = props => {
           </h1>
         )}
         <GenrerList genres={genres} />
-        <Grid>
-          {movies.map((movie, index) => (
-            <Row key={index} xs={12} sm={6} md={4} lg={3}>
-              <ShowItem {...movie} />
-            </Row>
-          ))}
-        </Grid>
-        {movies.length === 0 && <p>Nenhum filme encontrado.</p>}
+        <DynamicInfiniteScroll
+          config={{ loadMore: fetchMore, hasMore: page < totalPages }}
+          items={items}
+        />
       </div>
     </Layout>
   );
