@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer";
 import { Container } from "../../styles";
 import { LayoutWrapper } from "./styles";
 
-const Layout = props => {
+const Layout: React.FC<{}> = props => {
   return (
     <React.Fragment>
       <Header {...props} />
