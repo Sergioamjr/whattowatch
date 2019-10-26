@@ -1,13 +1,23 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Input = styled.input`
+const InputStyle = css`
   width: ${props => (props.inline ? "auto" : "100%")};
   border-radius: 3px;
   border: 1px solid #b3b3b3;
   padding: 5px;
   font-size: 16px;
   color: #4c4c4c;
+
   display: ${props => (props.inline ? "inline-block" : "block")};
+`;
+
+export const Input = styled.input`
+  ${InputStyle}
+`;
+
+export const Select = styled.select`
+  ${InputStyle};
+  height: 40px;
 `;
 
 export const Label = styled.label`

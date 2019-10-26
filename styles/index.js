@@ -55,7 +55,7 @@ export const Grid = styled.div`
   ${DFlex}
   ${JustifyBetween}
   ${FlexWrap}
-  margin: 0 -15px;
+  margin: ${props => (props.woMargin ? "0" : "0 -15px")};
 `;
 
 export const Button = styled.div`

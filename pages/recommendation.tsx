@@ -62,9 +62,32 @@ const Movies: React.FC<{}> = () => {
               </Style.Form.Label>
             </Style.Form.InputWrapper>
           ))}
-          <Style.Button onClick={fetchMovies}>
-            Look for recommendation
-          </Style.Button>
+          <Style.Form.InputWrapper>
+            <Style.Form.Label>Year</Style.Form.Label>
+            <Style.Form.Input value="" />
+          </Style.Form.InputWrapper>
+          <Style.Form.InputWrapper>
+            <Style.Form.Label>Year</Style.Form.Label>
+            <Style.Form.Select>
+              <option>1</option>
+              <option>1</option>
+              <option>1</option>
+            </Style.Form.Select>
+          </Style.Form.InputWrapper>
+          <Style.Form.InputWrapper>
+            <Style.Form.Label>Votes</Style.Form.Label>
+            <Style.Form.Select>
+              <option>1</option>
+              <option>1</option>
+              <option>1</option>
+            </Style.Form.Select>
+          </Style.Form.InputWrapper>
+          <Style.Grid woMargin>
+            <Style.Button onClick={fetchMovies}>
+              Look for recommendation
+            </Style.Button>
+            <Style.Button onClick={fetchMovies}>Hide Filters</Style.Button>
+          </Style.Grid>
         </form>
         {name && <p>{name}</p>}
         {img && <img src={`https://image.tmdb.org/t/p/w500/${img}`} />}
