@@ -12,7 +12,7 @@ describe("My First Test", () => {
   it("Should render header correctly", () => {
     cy.visit("http://localhost:3000/");
     cy.contains("header h1", "MovieMmendation");
-    cy.get("header nav li").should("have.length", 2);
+    cy.get("header nav li").should("have.length", 3);
     cy.contains("header nav li a", "Home");
     cy.contains("header nav li a", "Movie");
   });

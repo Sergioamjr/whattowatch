@@ -6,25 +6,56 @@ import { fetchCustomData } from "../services";
 import Loading from "../components/Loading";
 import * as Style from "../styles";
 import { generateRandonNumber } from "./../utils";
+import SuggestionInfo from "../components/SuggestionInfo";
 
 interface filtersType {
   year: number;
   minRate: number;
-  minVotes: number;
   selecteds: string[];
 }
 
 const defaultFilters = {
   year: 2019,
   minRate: 0,
-  minVotes: 0,
   selecteds: [""]
+};
+
+export interface SuggestionInfoTypes {
+  popularity: number;
+  vote_count: number;
+  poster_path: string;
+  id: number;
+  backdrop_path: string;
+  original_language: string;
+  original_title: string;
+  genre_ids: number[];
+  title: string;
+  vote_average: number;
+  overview: string;
+  release_date: string;
+}
+
+const defaultSuggestion = {
+  popularity: 0,
+  vote_count: 0,
+  poster_path: "",
+  id: 0,
+  backdrop_path: "",
+  original_language: "",
+  original_title: "",
+  genre_ids: [0],
+  title: "",
+  vote_average: 0,
+  overview: "",
+  release_date: ""
 };
 
 const opts = [9, 8, 7, 6, 5, 4];
 
 const Movies: React.FC<{}> = () => {
-  const [recommendedMovie, setRecommendedMovie] = React.useState({});
+  const [recommendedMovie, setRecommendedMovie] = React.useState<
+    SuggestionInfoTypes
+  >(defaultSuggestion);
   const [filters, setFilters] = React.useState<filtersType>(defaultFilters);
   const [isFetching, setIsFetching] = React.useState(false);
   const { genres } = React.useContext(AppContext);
@@ -68,8 +99,9 @@ const Movies: React.FC<{}> = () => {
     } catch (error) {}
   };
 
-  const name = _get(recommendedMovie, "original_title");
   const img = _get(recommendedMovie, "poster_path");
+
+  console.log(JSON.stringify(recommendedMovie, null, 2));
 
   return (
     <Layout>
@@ -78,86 +110,81 @@ const Movies: React.FC<{}> = () => {
           Recomendation
         </h1>
         <p>Select the genres that you would like to watch:</p>
-        <form>
-          {genres.map(({ id, name }) => {
-            return (
-              <Style.Form.InputWrapper inline key={id}>
+        <Style.Grid>
+          <Style.Row sm={4}>
+            <form>
+              {genres.map(({ id, name }) => {
+                return (
+                  <Style.Form.InputWrapper inline key={id}>
+                    <Style.Form.Input
+                      inline
+                      disabled={isFetching}
+                      onChange={() =>
+                        !(
+                          filters.selecteds.filter(
+                            id_ => id_.toString() === id.toString()
+                          ).length > 0
+                        )
+                          ? AddToSelectedsIds(id.toString())
+                          : RemoveFromSelectedsIds(id.toString())
+                      }
+                      checked={
+                        filters.selecteds.filter(
+                          id_ => id_.toString() === id.toString()
+                        ).length > 0
+                      }
+                      id={id}
+                      value={id.toString()}
+                      type="checkbox"
+                    />
+                    <Style.Form.Label inline htmlFor={id}>
+                      {name}
+                    </Style.Form.Label>
+                  </Style.Form.InputWrapper>
+                );
+              })}
+              <Style.Form.InputWrapper>
+                <Style.Form.Label>Year</Style.Form.Label>
                 <Style.Form.Input
-                  inline
-                  disabled={isFetching}
-                  onChange={() =>
-                    !(
-                      filters.selecteds.filter(
-                        id_ => id_.toString() === id.toString()
-                      ).length > 0
-                    )
-                      ? AddToSelectedsIds(id.toString())
-                      : RemoveFromSelectedsIds(id.toString())
-                  }
-                  checked={
-                    filters.selecteds.filter(
-                      id_ => id_.toString() === id.toString()
-                    ).length > 0
-                  }
-                  id={id}
-                  value={id.toString()}
-                  type="checkbox"
+                  name="year"
+                  type="number"
+                  onChange={onChangeMovies}
+                  value={filters.year}
                 />
-                <Style.Form.Label inline htmlFor={id}>
-                  {name}
-                </Style.Form.Label>
               </Style.Form.InputWrapper>
-            );
-          })}
-          <Style.Form.InputWrapper>
-            <Style.Form.Label>Year</Style.Form.Label>
-            <Style.Form.Input
-              name="year"
-              type="number"
-              onChange={onChangeMovies}
-              value={filters.year}
-            />
-          </Style.Form.InputWrapper>
-          <Style.Form.InputWrapper>
-            <Style.Form.Label>Year</Style.Form.Label>
-            <Style.Form.Select
-              name="minRate"
-              onChange={onChangeMovies}
-              value={filters.minRate}
-            >
-              <option value={0}>Indiferente</option>
-              {opts.map(opt => (
-                <option value={opt} key={opt}>
-                  min {opt}
-                </option>
-              ))}
-            </Style.Form.Select>
-          </Style.Form.InputWrapper>
-          <Style.Form.InputWrapper>
-            <Style.Form.Label>Votes</Style.Form.Label>
-            <Style.Form.Select
-              name="minVotes"
-              onChange={onChangeMovies}
-              value={filters.minVotes}
-            >
-              <option value={0}>Indiferente</option>
-              {opts.map(opt => (
-                <option value={opt} key={opt}>
-                  min {opt}
-                </option>
-              ))}
-            </Style.Form.Select>
-          </Style.Form.InputWrapper>
-          <Style.Grid woMargin>
-            <Style.Button onClick={fetchMovies}>
-              Look for recommendation
-            </Style.Button>
-            <Style.Button onClick={fetchMovies}>Hide Filters</Style.Button>
-          </Style.Grid>
-        </form>
-        {name && <p>{name}</p>}
-        {img && <img src={`https://image.tmdb.org/t/p/w500/${img}`} />}
-        {isFetching && <Loading />}
+              <Style.Form.InputWrapper>
+                <Style.Form.Label>Rate:</Style.Form.Label>
+                <Style.Form.Select
+                  name="minRate"
+                  onChange={onChangeMovies}
+                  value={filters.minRate}
+                >
+                  <option value={0}>Indiferente</option>
+                  {opts.map(opt => (
+                    <option value={opt} key={opt}>
+                      min {opt}
+                    </option>
+                  ))}
+                </Style.Form.Select>
+              </Style.Form.InputWrapper>
+
+              <Style.Button onClick={fetchMovies}>
+                Look for recommendation
+              </Style.Button>
+            </form>
+          </Style.Row>
+          <Style.Row sm={4}>
+            {isFetching && <Loading />}
+            {!isFetching && img && (
+              <img src={`https://image.tmdb.org/t/p/w500/${img}`} />
+            )}
+          </Style.Row>
+          <Style.Row sm={4}>
+            {!isFetching && recommendedMovie.title && (
+              <SuggestionInfo {...recommendedMovie} />
+            )}
+          </Style.Row>
+        </Style.Grid>
       </div>
     </Layout>
   );
