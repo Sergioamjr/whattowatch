@@ -21,14 +21,16 @@ export const Select = styled.select`
 `;
 
 export const Label = styled.label`
-  margin-bottom: 5px;
+  margin-bottom: ${props => (props.noMargin ? "0" : "5px")};
   color: #2f2f2f;
   padding-left: 5px;
+  font-size: 14px;
   display: ${props => (props.inline ? "inline-block" : "block")};
 `;
 
 export const InputWrapper = styled.div`
-  margin-bottom: 15px;
+  padding: 3px;
+  margin-bottom: 5px;
   display: ${props => (props.inline ? "inline-block" : "")};
-  margin-right: ${props => (props.inline ? "15px" : "")};
+  margin-right: ${props => (props.inline ? "5px" : "")};
 `;

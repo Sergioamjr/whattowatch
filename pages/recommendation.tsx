@@ -7,20 +7,19 @@ import Loading from "../components/Loading";
 import * as Style from "../styles";
 import { generateRandonNumber } from "./../utils";
 import SuggestionInfo from "../components/SuggestionInfo";
+import { H2 } from "../components/Header/styles";
 
 interface filtersType {
   year: number;
-  minRate: number;
   selecteds: string[];
 }
 
 const defaultFilters = {
   year: 2019,
-  minRate: 0,
   selecteds: [""]
 };
 
-export interface SuggestionInfoTypes {
+export interface MoviesType {
   popularity: number;
   vote_count: number;
   poster_path: string;
@@ -33,6 +32,12 @@ export interface SuggestionInfoTypes {
   vote_average: number;
   overview: string;
   release_date: string;
+}
+
+interface MoviesStatusType {
+  total_results: number;
+  total_pages: number;
+  page: number;
 }
 
 const defaultSuggestion = {
@@ -50,23 +55,27 @@ const defaultSuggestion = {
   release_date: ""
 };
 
-const opts = [9, 8, 7, 6, 5, 4];
-
 const Movies: React.FC<{}> = () => {
-  const [recommendedMovie, setRecommendedMovie] = React.useState<
-    SuggestionInfoTypes
-  >(defaultSuggestion);
+  const [movies, setmovies] = React.useState<MoviesType>(defaultSuggestion);
   const [filters, setFilters] = React.useState<filtersType>(defaultFilters);
-  const [isFetching, setIsFetching] = React.useState(false);
+  const [idsToRemove, setIdsToRemove] = React.useState<number[]>([]);
+  const [isFetching, setIsFetching] = React.useState<boolean>(false);
+  const [hasNoMoreSuggestion, setHasNoMoreSuggestion] = React.useState<boolean>(
+    false
+  );
   const { genres } = React.useContext(AppContext);
 
   const AddToSelectedsIds = (id: string) => {
+    setIdsToRemove([]);
+    setHasNoMoreSuggestion(false);
     setFilters({
       ...filters,
       selecteds: filters.selecteds.concat(id.toString())
     });
   };
   const RemoveFromSelectedsIds = (id: string) => {
+    setIdsToRemove([]);
+    setHasNoMoreSuggestion(false);
     setFilters({
       ...filters,
       selecteds: filters.selecteds.filter(
@@ -88,28 +97,33 @@ const Movies: React.FC<{}> = () => {
   const fetchMovies = async () => {
     try {
       setIsFetching(true);
-      const { results } = await fetchCustomData("3/discover/movie", {
-        with_genres: filters.selecteds.join().replace(",", ""),
-        primary_release_year: filters.year ? filters.year : "",
-        "vote_average.gte": filters.minRate
-      });
-      const key = generateRandonNumber(0, results.length - 1);
-      setRecommendedMovie(results[key]);
+      const { results, ...moviesStatus } = await fetchCustomData(
+        "3/discover/movie",
+        {
+          with_genres: filters.selecteds.join().replace(",", ""),
+          primary_release_year: filters.year ? filters.year : "",
+          page: Math.ceil(idsToRemove.length / 19) || 1
+        }
+      );
+      const resultsFiltered = results.filter(
+        (result: MoviesType) => !idsToRemove.includes(result.id)
+      );
+      const key = generateRandonNumber(0, resultsFiltered.length - 1);
+      setIdsToRemove(idsToRemove.concat(resultsFiltered[key].id));
+      setmovies(resultsFiltered[key]);
       setIsFetching(false);
-    } catch (error) {}
+    } catch (error) {
+      setIsFetching(false);
+      setHasNoMoreSuggestion(true);
+      setmovies(defaultSuggestion);
+    }
   };
 
-  const img = _get(recommendedMovie, "poster_path");
-
-  console.log(JSON.stringify(recommendedMovie, null, 2));
-
+  const img = _get(movies, "poster_path");
   return (
     <Layout>
       <div className="hero">
-        <h1 className="title" data-testid="title">
-          Recomendation
-        </h1>
-        <p>Select the genres that you would like to watch:</p>
+        <H2>Select the genres that you're interested:</H2>
         <Style.Grid>
           <Style.Row sm={4}>
             <form>
@@ -137,7 +151,7 @@ const Movies: React.FC<{}> = () => {
                       value={id.toString()}
                       type="checkbox"
                     />
-                    <Style.Form.Label inline htmlFor={id}>
+                    <Style.Form.Label noMargin inline htmlFor={id}>
                       {name}
                     </Style.Form.Label>
                   </Style.Form.InputWrapper>
@@ -152,38 +166,36 @@ const Movies: React.FC<{}> = () => {
                   value={filters.year}
                 />
               </Style.Form.InputWrapper>
-              <Style.Form.InputWrapper>
-                <Style.Form.Label>Rate:</Style.Form.Label>
-                <Style.Form.Select
-                  name="minRate"
-                  onChange={onChangeMovies}
-                  value={filters.minRate}
-                >
-                  <option value={0}>Indiferente</option>
-                  {opts.map(opt => (
-                    <option value={opt} key={opt}>
-                      min {opt}
-                    </option>
-                  ))}
-                </Style.Form.Select>
-              </Style.Form.InputWrapper>
 
-              <Style.Button onClick={fetchMovies}>
-                Look for recommendation
+              <Style.Button
+                disabled={isFetching || hasNoMoreSuggestion}
+                onClick={fetchMovies}
+              >
+                Search
               </Style.Button>
             </form>
           </Style.Row>
-          <Style.Row sm={4}>
-            {isFetching && <Loading />}
-            {!isFetching && img && (
-              <img src={`https://image.tmdb.org/t/p/w500/${img}`} />
-            )}
-          </Style.Row>
-          <Style.Row sm={4}>
-            {!isFetching && recommendedMovie.title && (
-              <SuggestionInfo {...recommendedMovie} />
-            )}
-          </Style.Row>
+          {hasNoMoreSuggestion && (
+            <Style.Row sm={8}>
+              <p>No more results. Please, reset the genres filters.</p>
+            </Style.Row>
+          )}
+          {!hasNoMoreSuggestion && (
+            <Style.Row sm={4}>
+              {isFetching && <Loading />}
+              {!isFetching && img && (
+                <img
+                  alt="Filme"
+                  src={`https://image.tmdb.org/t/p/w500/${img}`}
+                />
+              )}
+            </Style.Row>
+          )}
+          {!hasNoMoreSuggestion && (
+            <Style.Row sm={4}>
+              {!isFetching && movies.title && <SuggestionInfo {...movies} />}
+            </Style.Row>
+          )}
         </Style.Grid>
       </div>
     </Layout>

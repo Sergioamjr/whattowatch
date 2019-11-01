@@ -16,7 +16,7 @@ describe("App", () => {
     await act(async () => {
       wrapper = render(<Home />);
     });
-    expect(wrapper.getByText("Lasts movies")).toBeInTheDocument();
-    expect(wrapper.getByTestId("title")).toHaveTextContent("Lasts movies");
+    expect(wrapper.getByText("Select by genre:")).toBeInTheDocument();
+    // expect(wrapper.getByTestId("title")).toHaveTextContent("Lasts movies");
   });
 });

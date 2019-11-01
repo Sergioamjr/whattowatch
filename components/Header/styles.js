@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import UI from "./../../theme";
+// import UI from "./../../theme";
 import {
   DFlex,
   JustifyBetween,
@@ -8,9 +8,8 @@ import {
 } from "../../styles";
 
 export const Header = styled.header`
-  background-color: ${UI.color.theme};
-  color: #fff;
-  height: 70px;
+  margin-top: 20px;
+  padding: 10px 0;
 `;
 
 export const Grid = styled.div`
@@ -28,4 +27,10 @@ export const GridUL = styled.ul`
 export const A = styled.a`
   cursor: pointer;
   ${ColorWhiteCSS}
+`;
+
+export const H2 = styled.h2`
+  font-size: 1rem;
+  margin-bottom: 15px;
+  font-weight: lighter;
 `;

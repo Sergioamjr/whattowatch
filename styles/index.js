@@ -58,16 +58,18 @@ export const Grid = styled.div`
   margin: ${props => (props.woMargin ? "0" : "0 -15px")};
 `;
 
-export const Button = styled.div`
+export const Button = styled.button`
   border: 0;
-  background: red;
-  border-radius: 3px;
+  background: #b62d54;
   padding: 10px;
   color: #fff;
-  text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
   display: inline-block;
   cursor: pointer;
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 `;
 
 export const Row = styled.div`

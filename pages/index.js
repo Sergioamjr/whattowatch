@@ -1,15 +1,12 @@
 import React from "react";
 
 import Layout from "../components/Layout/Layout";
-import styled from "styled-components";
+
 import GenrerList from "../components/GenrerList/GenrerList";
 import { AppContext } from "./_app";
 import { fetchMovies } from "../services";
 import DynamicInfiniteScroll from "../components/InfiniteScroll";
-
-const H1 = styled.h1`
-  margin-bottom: 30px;
-`;
+import { H2 } from "../components/Header/styles";
 
 const Home = () => {
   const [page, setPage] = React.useState(1);
@@ -27,9 +24,9 @@ const Home = () => {
   return (
     <Layout>
       <div>
-        <H1 className="title" data-testid="title">
-          Lasts movies
-        </H1>
+        <H2 className="title" data-testid="title">
+          Select by genre:
+        </H2>
         <GenrerList genres={genres} />
         <DynamicInfiniteScroll
           config={{

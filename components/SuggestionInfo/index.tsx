@@ -1,9 +1,9 @@
 import React from "react";
 import * as Style from "./style";
-import { SuggestionInfoTypes } from "./../../pages/recommendation";
+import { MoviesType } from "./../../pages/recommendation";
 import { returnGenrerName } from "./../../utils/customHooks";
 
-const SuggestionInfo: React.FC<SuggestionInfoTypes> = props => {
+const SuggestionInfo: React.FC<MoviesType> = props => {
   return (
     <div>
       <Style.MBottom15>

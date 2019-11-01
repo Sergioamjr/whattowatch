@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const LayoutWrapper = styled.div`
-  height: calc(100vh - 60px);
-  padding-top: 40px;
+  padding-top: 20px;
   overflow: scroll;
 `;

@@ -7,6 +7,14 @@ import { Container } from "../../styles";
 
 const MLeft10 = styled(A)`
   margin-left: 10px;
+  font-size: 1rem;
+  color: #333;
+`;
+
+const H1 = styled.h1`
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: #333;
 `;
 
 const HeaderComponent = props => {
@@ -14,21 +22,17 @@ const HeaderComponent = props => {
     <Header role="banner">
       <Container>
         <Grid>
-          <h1>MovieMmendation</h1>
+          <H1>Suggest me something</H1>
           <nav>
             <GridUL>
               <li>
-                <Link style={{ marginLeft: 10 }} href="/">
+                <Link href="/">
                   <MLeft10>Home</MLeft10>
                 </Link>
               </li>
+
               <li>
-                <Link style={{ marginLeft: 10 }} href="/movies">
-                  <MLeft10>Movies</MLeft10>
-                </Link>
-              </li>
-              <li>
-                <Link style={{ marginLeft: 10 }} href="/recommendation">
+                <Link href="/recommendation">
                   <MLeft10>Recomendation</MLeft10>
                 </Link>
               </li>

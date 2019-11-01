@@ -14,7 +14,6 @@ const Div = styled.div`
   margin-right: 20px;
   border: 1px solid #d4d4d4;
   padding-bottom: 10px;
-  border-radius: 5px;
 `;
 
 const Icon = styled.div`

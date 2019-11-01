@@ -4,9 +4,9 @@ import _get from "lodash/get";
 import Layout from "../../components/Layout/Layout";
 import GenrerList from "../../components/GenrerList/GenrerList";
 import { AppContext } from "../_app";
-import { returnGenrerName } from "../../utils/customHooks";
 import DynamicInfiniteScroll from "../../components/InfiniteScroll";
 import { fetchCustomData } from "../../services";
+import { H2 } from "../../components/Header/styles";
 
 const Genrer = props => {
   const router = useRouter();
@@ -15,7 +15,6 @@ const Genrer = props => {
   const [page, setPage] = React.useState(1);
   const [items, setItems] = React.useState([]);
   const { genres } = React.useContext(AppContext);
-  const name = returnGenrerName(id);
 
   React.useEffect(() => {
     setItems([]);
@@ -42,12 +41,11 @@ const Genrer = props => {
   return (
     <Layout>
       <div className="hero">
-        {name && (
-          <h1 className="title" data-testid="title">
-            Genrer: {name}
-          </h1>
-        )}
-        <GenrerList genres={genres} />
+        <H2 className="title" data-testid="title">
+          Select by genre:
+        </H2>
+
+        <GenrerList selected={id} genres={genres} />
         <DynamicInfiniteScroll
           config={{ loadMore: fetchMore, hasMore: page < totalPages }}
           items={items}
