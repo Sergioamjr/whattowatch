@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import UI from "./../theme";
+import UI from "./theme";
 import * as Form from "./form";
 
 export { Form };

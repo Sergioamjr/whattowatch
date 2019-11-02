@@ -1,9 +1,12 @@
 {
   "name": "suggestmesomething",
   "version": 2,
-  "builds": [
-    { "src": "*.html", "use": "@now/static" },
-    { "src": "*.js", "use": "@now/node" }
+  "builds": [{ "src": "pages/index.js", "use": "@now/node" }],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "pages/index.js"
+    }
   ],
   "public": true
 }
