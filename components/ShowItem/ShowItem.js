@@ -11,7 +11,6 @@ const Div = styled.div`
   margin-bottom: 40px;
   overflow: hidden;
   position: relative;
-  margin-right: 20px;
   border: 1px solid #d4d4d4;
   padding-bottom: 10px;
 `;
