@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import InfiniteScroll_ from "react-infinite-scroller";
-import { Row } from "../../styles";
+import * as Style from "../../styles";
 import ShowItem from "../ShowItem/ShowItem";
+import { MoviesType } from "./../../pages/recommendation";
 
 const ScrollWraper = styled(InfiniteScroll_)`
   flex-wrap: wrap;
@@ -12,7 +12,15 @@ const ScrollWraper = styled(InfiniteScroll_)`
   justify-content: space-between;
 `;
 
-const DynamicInfiniteScroll = props => {
+interface DynamicInfiniteScrollTypes {
+  items: [MoviesType];
+  config: {
+    loadMore: () => void;
+    hasMore: boolean;
+  };
+}
+
+const DynamicInfiniteScroll: React.FC<DynamicInfiniteScrollTypes> = props => {
   return (
     <div style={{ height: 700, overflow: "auto" }}>
       <ScrollWraper
@@ -32,19 +40,13 @@ const DynamicInfiniteScroll = props => {
             return 0;
           })
           .map((movie, index) => (
-            <Row key={index} xs={12} sm={4} md={3} lg={2}>
+            <Style.Row key={index} xs={12} sm={4} md={3} lg={2}>
               <ShowItem {...movie} />
-            </Row>
+            </Style.Row>
           ))}
       </ScrollWraper>
     </div>
   );
-};
-
-DynamicInfiniteScroll.propTypes = {
-  items: PropTypes.array.isRequired,
-  config: PropTypes.object,
-  hasMore: PropTypes.bool
 };
 
 export default DynamicInfiniteScroll;

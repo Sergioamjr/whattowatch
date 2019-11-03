@@ -1,39 +1,43 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Link from "next/link";
-import { MBottom30, CategoriesLists, CategoriesItem } from "./style";
+import * as Style from "./style";
 
-const GenrerList = props => {
+interface GenresType {
+  id: string;
+  name: string;
+}
+
+interface Props {
+  genres: [GenresType];
+  selected: string;
+}
+
+const GenrerList: React.FC<Props> = props => {
   return (
     <div>
       {props.genres.length > 0 && (
-        <MBottom30>
-          <CategoriesLists>
-            <CategoriesItem selected={!props.selected}>
+        <Style.MBottom30>
+          <Style.CategoriesLists>
+            <Style.CategoriesItem selected={!props.selected}>
               <Link href="/" as="/">
                 <a>All</a>
               </Link>
-            </CategoriesItem>
+            </Style.CategoriesItem>
             {props.genres.map(({ id, name }) => (
-              <CategoriesItem
+              <Style.CategoriesItem
                 selected={props.selected === id.toString()}
                 key={id}
               >
                 <Link href="/genrer/[id]" as={`/genrer/${id}`}>
                   <a>{name}</a>
                 </Link>
-              </CategoriesItem>
+              </Style.CategoriesItem>
             ))}
-          </CategoriesLists>
-        </MBottom30>
+          </Style.CategoriesLists>
+        </Style.MBottom30>
       )}
     </div>
   );
-};
-
-GenrerList.propTypes = {
-  genres: PropTypes.array,
-  selected: PropTypes.string
 };
 
 export default GenrerList;

@@ -55,7 +55,7 @@ export const Grid = styled.div`
   ${DFlex}
   ${JustifyBetween}
   ${FlexWrap}
-  margin: ${props => (props.woMargin ? "0" : "0 -15px")};
+  margin: "0 -15px";
 `;
 
 export const GridUL = styled.ul`
@@ -89,34 +89,42 @@ export const Button = styled.button`
   }
 `;
 
+interface RowType {
+  xs?: number;
+  sm?: number;
+  md?: number;
+  lg?: number;
+}
+
 export const Row = styled.div`
   box-sizing: border-box;
   padding: 0 15px;
-  width: ${({ xs }) => (xs ? `${(xs / 12) * 100}%` : "100%")};
+  width: ${(props: RowType) =>
+    props.xs ? `${(props.xs / 12) * 100}%` : "100%"};
   @media screen and (min-width: 768px) {
     width: ${({ sm, xs }) =>
       sm ? `${(sm / 12) * 100}%` : xs ? `${(xs / 12) * 100}%` : "100%"};
   }
   @media screen and (min-width: 992px) {
-    width: ${({ md, sm, xs }) =>
-      md
-        ? `${(md / 12) * 100}%`
-        : sm
-        ? `${(sm / 12) * 100}%`
-        : xs
-        ? `${(xs / 12) * 100}%`
+    width: ${(props: RowType) =>
+      props.md
+        ? `${(props.md / 12) * 100}%`
+        : props.sm
+        ? `${(props.sm / 12) * 100}%`
+        : props.xs
+        ? `${(props.xs / 12) * 100}%`
         : "100%"};
   }
   @media screen and (min-width: 1200px) {
-    width: ${({ lg, md, sm, xs }) =>
-      lg
-        ? `${(lg / 12) * 100}%`
-        : md
-        ? `${(md / 12) * 100}%`
-        : sm
-        ? `${(sm / 12) * 100}%`
-        : xs
-        ? `${(xs / 12) * 100}%`
+    width: ${(props: RowType) =>
+      props.lg
+        ? `${(props.lg / 12) * 100}%`
+        : props.md
+        ? `${(props.md / 12) * 100}%`
+        : props.sm
+        ? `${(props.sm / 12) * 100}%`
+        : props.xs
+        ? `${(props.xs / 12) * 100}%`
         : "100%"};
   }
 `;

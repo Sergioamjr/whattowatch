@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.144",
+    "@types/react-infinite-scroller": "^1.2.1",
+    "@types/styled-components": "^4.1.20",
     "axios": "^0.19.0",
     "cypress": "^3.4.1",
     "next": "^9.0.7",

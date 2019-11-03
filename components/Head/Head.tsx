@@ -1,10 +1,10 @@
 import React from "react";
 import Head from "next/head";
 
-const HeadComponent = () => {
+const HeadComponent: React.FC<{}> = () => {
   return (
     <Head>
-      <title>Moviemmendation</title>
+      <title>WhatToWatch?</title>
       <meta
         name="viewport"
         content="initial-scale=1.0, width=device-width"
