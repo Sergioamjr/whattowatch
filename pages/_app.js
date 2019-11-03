@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     list-style-type: none;
   }
   img {
+    width: 100%;
     max-width: 100%;
   }
 `;

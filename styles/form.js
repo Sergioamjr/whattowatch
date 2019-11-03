@@ -22,15 +22,14 @@ export const Select = styled.select`
 
 export const Label = styled.label`
   margin-bottom: ${props => (props.noMargin ? "0" : "5px")};
-  color: #2f2f2f;
+  color: #696969;
   padding-left: 5px;
   font-size: 14px;
   display: ${props => (props.inline ? "inline-block" : "block")};
 `;
 
 export const InputWrapper = styled.div`
-  padding: 3px;
   margin-bottom: 5px;
   display: ${props => (props.inline ? "inline-block" : "")};
-  margin-right: ${props => (props.inline ? "5px" : "")};
+  margin-right: ${props => (props.inline ? "10px" : "")};
 `;

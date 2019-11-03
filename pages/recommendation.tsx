@@ -94,7 +94,8 @@ const Movies: React.FC<{}> = () => {
     });
   };
 
-  const fetchMovies = async () => {
+  const fetchMovies = async (e: MouseEvent) => {
+    e.preventDefault();
     try {
       setIsFetching(true);
       const { results, ...moviesStatus } = await fetchCustomData(
@@ -166,13 +167,14 @@ const Movies: React.FC<{}> = () => {
                   value={filters.year}
                 />
               </Style.Form.InputWrapper>
-
-              <Style.Button
-                disabled={isFetching || hasNoMoreSuggestion}
-                onClick={fetchMovies}
-              >
-                Search
-              </Style.Button>
+              <Style.Form.InputWrapper>
+                <Style.Button
+                  disabled={isFetching || hasNoMoreSuggestion}
+                  onClick={fetchMovies}
+                >
+                  Search
+                </Style.Button>
+              </Style.Form.InputWrapper>
             </form>
           </Style.Row>
           {hasNoMoreSuggestion && (

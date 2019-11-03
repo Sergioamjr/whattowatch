@@ -8,7 +8,7 @@ export const Title = styled.h2`
 
 export const Description = styled.p`
   margin-bottom: 5px;
-  color: #333;
+  color: #696969;
 `;
 
 export const MBottom15 = styled.div`

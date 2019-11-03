@@ -21,6 +21,7 @@ const Icon = styled.div`
   display: flex;
   align-items: center;
   height: 30px;
+  color: #696969;
   &:after {
     content: "";
     background-image: ${props => `url(${props.icon});`}
@@ -49,6 +50,7 @@ const P = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0 15px;
+  color: #696969;
 `;
 
 const transitionStyles = {

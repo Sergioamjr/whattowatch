@@ -33,4 +33,5 @@ export const H2 = styled.h2`
   font-size: 1rem;
   margin-bottom: 15px;
   font-weight: lighter;
+  color: #696969;
 `;
