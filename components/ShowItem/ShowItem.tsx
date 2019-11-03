@@ -1,25 +1,19 @@
 /* eslint-disable camelcase */
 import React from "react";
 import { Transition } from "react-transition-group";
-import PropTypes from "prop-types";
-import trandingIcon from "./../../static/trending.svg";
-import rankingIcon from "./../../static/podium.svg";
-import genericImg from "./../../static/download.png";
+import * as trandingIcon from "./../../static/trending.svg";
+import * as rankingIcon from "./../../static/podium.svg";
+import * as genericImg from "./../../static/download.png";
 import * as Style from "./style";
-
-const transitionStyles = {
-  entering: { opacity: 1, transform: "translateY(0px)" },
-  entered: { opacity: 1, transform: "translateY(0px)" },
-  exiting: { opacity: 0, transform: "translateY(-30px)" },
-  exited: { opacity: 0, transform: "translateY(30px)" }
-};
+import { MoviesType } from "./../../pages/recommendation";
+import { switchStyle } from "./utils";
 
 const defaultStyle = {
   transition: "all .5s ease",
   opacity: 1
 };
 
-const ShowItem = props => {
+const ShowItem: React.FC<MoviesType> = props => {
   const [inProp, setInProp] = React.useState(false);
   React.useEffect(() => {
     setInProp(false);
@@ -34,14 +28,14 @@ const ShowItem = props => {
     : genericImg;
   return (
     <Transition in={inProp} timeout={500}>
-      {state => {
+      {(state: string) => {
+        const newStyle = switchStyle(state);
+        const style = {
+          ...defaultStyle,
+          ...newStyle
+        };
         return (
-          <div
-            style={{
-              ...defaultStyle,
-              ...transitionStyles[state]
-            }}
-          >
+          <div style={style}>
             <Style.Div className="show-item" data-test-id="test-example">
               <img alt={`${title} poster show`} src={imgUrl} />
               <Style.WrapperIcons>
@@ -55,13 +49,6 @@ const ShowItem = props => {
       }}
     </Transition>
   );
-};
-
-ShowItem.propTypes = {
-  title: PropTypes.string,
-  popularity: PropTypes.number,
-  vote_average: PropTypes.number,
-  poster_path: PropTypes.string
 };
 
 export default ShowItem;

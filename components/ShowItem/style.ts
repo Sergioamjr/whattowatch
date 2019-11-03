@@ -17,7 +17,7 @@ export const Icon = styled.div`
   color: #696969;
   &:after {
     content: "";
-    background-image: ${props => `url(${props.icon});`}
+    background-image: ${(props: { icon: string }) => `url(${props.icon});`}
     width: 25px;
     height: 30px;
     display: block;
