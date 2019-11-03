@@ -7,7 +7,6 @@ import Loading from "../components/Loading";
 import * as Style from "../styles";
 import { generateRandonNumber } from "./../utils";
 import SuggestionInfo from "../components/SuggestionInfo";
-import { H2 } from "../components/Header/styles";
 
 interface filtersType {
   year: number;
@@ -32,12 +31,6 @@ export interface MoviesType {
   vote_average: number;
   overview: string;
   release_date: string;
-}
-
-interface MoviesStatusType {
-  total_results: number;
-  total_pages: number;
-  page: number;
 }
 
 const defaultSuggestion = {
@@ -98,14 +91,11 @@ const Movies: React.FC<{}> = () => {
     e.preventDefault();
     try {
       setIsFetching(true);
-      const { results, ...moviesStatus } = await fetchCustomData(
-        "3/discover/movie",
-        {
-          with_genres: filters.selecteds.join().replace(",", ""),
-          primary_release_year: filters.year ? filters.year : "",
-          page: Math.ceil(idsToRemove.length / 19) || 1
-        }
-      );
+      const { results } = await fetchCustomData("3/discover/movie", {
+        with_genres: filters.selecteds.join().replace(",", ""),
+        primary_release_year: filters.year ? filters.year : "",
+        page: Math.ceil(idsToRemove.length / 19) || 1
+      });
       const resultsFiltered = results.filter(
         (result: MoviesType) => !idsToRemove.includes(result.id)
       );
@@ -124,7 +114,7 @@ const Movies: React.FC<{}> = () => {
   return (
     <Layout>
       <div className="hero">
-        <H2>Select the genres that you're interested:</H2>
+        <Style.H2>Select the genres that you're interested:</Style.H2>
         <Style.Grid>
           <Style.Row sm={4}>
             <form>

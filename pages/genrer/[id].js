@@ -6,7 +6,7 @@ import GenrerList from "../../components/GenrerList/GenrerList";
 import { AppContext } from "../_app";
 import DynamicInfiniteScroll from "../../components/InfiniteScroll";
 import { fetchCustomData } from "../../services";
-import { H2 } from "../../components/Header/styles";
+import { H2 } from "../../styles";
 
 const Genrer = props => {
   const router = useRouter();

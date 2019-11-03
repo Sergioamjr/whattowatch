@@ -1,37 +1,24 @@
 import styled from "styled-components";
-// import UI from "./../../theme";
-import {
-  DFlex,
-  JustifyBetween,
-  ColorWhiteCSS,
-  AlignCenter
-} from "../../styles";
+import { A } from "../../styles";
 
 export const Header = styled.header`
   margin-top: 20px;
   padding: 10px 0;
 `;
 
-export const Grid = styled.div`
-  ${DFlex}
-  ${JustifyBetween}
-  ${AlignCenter}
-  height: 100%
-`;
-
-export const GridUL = styled.ul`
-  ${DFlex}
-  ${JustifyBetween}
-`;
-
-export const A = styled.a`
-  cursor: pointer;
-  ${ColorWhiteCSS}
-`;
-
-export const H2 = styled.h2`
+export const MLeft10 = styled(A)`
+  margin-left: 10px;
   font-size: 1rem;
-  margin-bottom: 15px;
-  font-weight: lighter;
-  color: #696969;
+  color: #46a57a;
+  border-bottom: 1px solid;
+`;
+
+export const H1 = styled.h1`
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: #46a57a;
+  span {
+    color: #fff;
+    background: #46a57a;
+  }
 `;

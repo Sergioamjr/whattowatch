@@ -58,6 +58,23 @@ export const Grid = styled.div`
   margin: ${props => (props.woMargin ? "0" : "0 -15px")};
 `;
 
+export const GridUL = styled.ul`
+  ${DFlex}
+  ${JustifyBetween}
+`;
+
+export const A = styled.a`
+  cursor: pointer;
+  ${ColorWhiteCSS}
+`;
+
+export const H2 = styled.h2`
+  font-size: 1rem;
+  margin-bottom: 15px;
+  font-weight: lighter;
+  color: #696969;
+`;
+
 export const Button = styled.button`
   border: 0;
   background: #b62d54;

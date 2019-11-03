@@ -24,15 +24,15 @@ const SuggestionInfo: React.FC<MoviesType> = props => {
         </Style.Description>
       </Style.MBottom15>
       <Style.MBottom15>
-        <Style.Title>Popularity</Style.Title>
+        <Style.Title>Popularity:</Style.Title>
         <Style.Description>{props.popularity}</Style.Description>
       </Style.MBottom15>
       <Style.MBottom15>
-        <Style.Title>Nota</Style.Title>
+        <Style.Title>IMDB:</Style.Title>
         <Style.Description>{props.vote_average}</Style.Description>
       </Style.MBottom15>
       <Style.MBottom15>
-        <Style.Title>Resume:</Style.Title>
+        <Style.Title>Plot:</Style.Title>
         <Style.Description>{props.overview}</Style.Description>
       </Style.MBottom15>
     </div>

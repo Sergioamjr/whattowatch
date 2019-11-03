@@ -1,12 +1,10 @@
 import React from "react";
-
 import Layout from "../components/Layout/Layout";
-
 import GenrerList from "../components/GenrerList/GenrerList";
 import { AppContext } from "./_app";
 import { fetchMovies } from "../services";
 import DynamicInfiniteScroll from "../components/InfiniteScroll";
-import { H2 } from "../components/Header/styles";
+import { H2 } from "../styles";
 
 const Home = () => {
   const [page, setPage] = React.useState(1);
