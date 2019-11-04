@@ -13,7 +13,7 @@ const ScrollWraper = styled(InfiniteScroll_)`
 `;
 
 interface DynamicInfiniteScrollTypes {
-  items: [MoviesType];
+  items: MoviesType[];
   config: {
     loadMore: () => void;
     hasMore: boolean;

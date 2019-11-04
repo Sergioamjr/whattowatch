@@ -3,28 +3,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "next/app";
 import HeadComponent from "../components/Head/Head";
-
-import { createGlobalStyle } from "styled-components";
 import { fetchMoviesGenres } from "../services";
+import { GenresType } from "./../utils/types";
+import { GlobalStyle } from "./../styles/globals";
 
-const GlobalStyle = createGlobalStyle`
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; 
-    font-family: 'Noto Sans', sans-serif;
-    list-style-type: none;
-  }
-  img {
-    width: 100%;
-    max-width: 100%;
-  }
-`;
+interface State {
+  genres: GenresType[];
+}
 
-export const AppContext = React.createContext({ genres: [] });
+export const AppContext = React.createContext<State>({ genres: [] });
 
-class MyApp extends App {
-  state = {
+class MyApp extends App<{}, State> {
+  state: State = {
     genres: []
   };
 

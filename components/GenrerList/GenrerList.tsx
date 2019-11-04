@@ -1,15 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import * as Style from "./style";
-
-interface GenresType {
-  id: string;
-  name: string;
-}
+import { GenresType } from "./../../utils/types";
 
 interface Props {
-  genres: [GenresType];
-  selected: string;
+  genres: GenresType[];
+  selected?: string;
 }
 
 const GenrerList: React.FC<Props> = props => {

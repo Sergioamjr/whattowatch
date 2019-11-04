@@ -5,16 +5,17 @@ import { AppContext } from "./_app";
 import { fetchMovies } from "../services";
 import DynamicInfiniteScroll from "../components/InfiniteScroll";
 import { H2 } from "../styles";
+import { MoviesType } from "./../utils/types";
 
-const Home = () => {
-  const [page, setPage] = React.useState(1);
+const Home: React.FC<{}> = () => {
+  const [page, setPage] = React.useState<number>(1);
   const { genres } = React.useContext(AppContext);
-  const [movies_, setMovies_] = React.useState([]);
+  const [movies, setMovies] = React.useState<MoviesType[]>([]);
 
-  const fetchMore = async f => {
+  const fetchMore = async () => {
     try {
       const newMovies = await fetchMovies(page);
-      setMovies_(movies_.concat(newMovies));
+      setMovies(movies.concat(newMovies));
       setPage(page + 1);
     } catch (error) {}
   };
@@ -31,7 +32,7 @@ const Home = () => {
             loadMore: fetchMore,
             hasMore: page < 499
           }}
-          items={movies_}
+          items={movies}
         />
       </div>
     </Layout>

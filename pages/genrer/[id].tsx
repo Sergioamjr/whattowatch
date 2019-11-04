@@ -7,13 +7,14 @@ import { AppContext } from "../_app";
 import DynamicInfiniteScroll from "../../components/InfiniteScroll";
 import { fetchCustomData } from "../../services";
 import { H2 } from "../../styles";
+import { MoviesType } from "./../../pages/recommendation";
 
-const Genrer = props => {
+const Genrer: React.FC<{}> = () => {
   const router = useRouter();
   const id = _get(router, "query.id");
-  const [totalPages, setTotalPages] = React.useState(0);
-  const [page, setPage] = React.useState(1);
-  const [items, setItems] = React.useState([]);
+  const [totalPages, setTotalPages] = React.useState<number>(0);
+  const [page, setPage] = React.useState<number>(1);
+  const [items, setItems] = React.useState<MoviesType[]>([]);
   const { genres } = React.useContext(AppContext);
 
   React.useEffect(() => {
@@ -23,7 +24,7 @@ const Genrer = props => {
     fetchMore();
   }, [id]);
 
-  const fetchMore = async f => {
+  const fetchMore = async () => {
     try {
       const { results, total_pages: totalPages } = await fetchCustomData(
         "3/discover/movie",

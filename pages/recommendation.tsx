@@ -7,6 +7,7 @@ import Loading from "../components/Loading";
 import * as Style from "../styles";
 import { generateRandonNumber } from "./../utils";
 import SuggestionInfo from "../components/SuggestionInfo";
+import { MoviesType } from "./../utils/types";
 
 interface filtersType {
   year: number;
@@ -17,21 +18,6 @@ const defaultFilters = {
   year: 2019,
   selecteds: [""]
 };
-
-export interface MoviesType {
-  popularity: number;
-  vote_count: number;
-  poster_path: string;
-  id: number;
-  backdrop_path: string;
-  original_language: string;
-  original_title: string;
-  genre_ids: number[];
-  title: string;
-  vote_average: number;
-  overview: string;
-  release_date: string;
-}
 
 const defaultSuggestion = {
   popularity: 0,

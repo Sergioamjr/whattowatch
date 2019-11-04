@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const InputStyle = css`
-  width: ${props => (props.inline ? "auto" : "100%")};
+  width: ${(props: { inline: boolean }) => (props.inline ? "auto" : "100%")};
   border-radius: 3px;
   border: 1px solid #b3b3b3;
   padding: 5px;
@@ -21,7 +21,8 @@ export const Select = styled.select`
 `;
 
 export const Label = styled.label`
-  margin-bottom: ${props => (props.noMargin ? "0" : "5px")};
+  margin-bottom: ${(props: { noMargin: boolean; inline: boolean }) =>
+    props.noMargin ? "0" : "5px"};
   color: #696969;
   padding-left: 5px;
   font-size: 14px;
@@ -30,6 +31,7 @@ export const Label = styled.label`
 
 export const InputWrapper = styled.div`
   margin-bottom: 5px;
-  display: ${props => (props.inline ? "inline-block" : "")};
+  display: ${(props: { inline: boolean }) =>
+    props.inline ? "inline-block" : ""};
   margin-right: ${props => (props.inline ? "10px" : "")};
 `;
