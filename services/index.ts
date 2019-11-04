@@ -1,15 +1,16 @@
 import axios from "axios";
 const key = process.env.NEXT_SERVER_API_KEY;
 const baseURL = "https://api.themoviedb.org";
+import { MoviesType } from "./../utils/types";
 
-const formatResponse = (response: { data: { results: string } }) => {
+const formatResponse = (response: { data: { results: MoviesType[] } }) => {
   const {
     data: { results }
   } = response;
   return results;
 };
 
-export const fetchMovies = (page: number) => {
+export const fetchMovies = (page?: number) => {
   return axios
     .get(
       `${baseURL}/3/discover/movie?include_adult=false&api_key=${key}&page=${page}`
@@ -24,9 +25,9 @@ export const fetchMoviesGenres = () => {
 };
 
 interface ParamsType {
-  with_genres: string;
-  primary_release_year: string;
-  page: number;
+  with_genres?: string;
+  primary_release_year?: string;
+  page?: number;
 }
 export const fetchCustomData = (url: string, params: ParamsType) => {
   return axios
