@@ -1,5 +1,5 @@
 import axios from "axios";
-const key = "a1dc06d0f8d65b34ac156d07fe333060";
+const key = process.env.NEXT_SERVER_API_KEY;
 const baseURL = "https://api.themoviedb.org";
 
 const FetchAPITest = async (req, res) => {
