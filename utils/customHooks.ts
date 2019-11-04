@@ -56,7 +56,7 @@ export const fetchMoviesAndGenresHook = () => {
   };
 };
 
-export const returnGenrerName = (id: string) => {
+export const returnGenrerName = (id: string | number) => {
   const { genres } = React.useContext(AppContext);
   const currentGenrer = genres.find(
     ({ id: _id }) => _id.toString() === id.toString()

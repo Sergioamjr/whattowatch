@@ -73,8 +73,7 @@ const Movies: React.FC<{}> = () => {
     });
   };
 
-  const fetchMovies = async (e: MouseEvent) => {
-    e.preventDefault();
+  const fetchMovies = async () => {
     try {
       setIsFetching(true);
       const { results } = await fetchCustomData("3/discover/movie", {
@@ -155,7 +154,7 @@ const Movies: React.FC<{}> = () => {
           </Style.Row>
           {hasNoMoreSuggestion && (
             <Style.Row sm={8}>
-              <p>No more results. Please, reset the genres filters.</p>
+              <Style.H2>No results. Please, reset the genres filters.</Style.H2>
             </Style.Row>
           )}
           {!hasNoMoreSuggestion && (

@@ -5,7 +5,7 @@ import * as trandingIcon from "./../../static/trending.svg";
 import * as rankingIcon from "./../../static/podium.svg";
 import * as genericImg from "./../../static/download.png";
 import * as Style from "./style";
-import { MoviesType } from "./../../pages/recommendation";
+import { MoviesType } from "./../../utils/types";
 import { switchStyle } from "./utils";
 
 const defaultStyle = {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import InfiniteScroll_ from "react-infinite-scroller";
 import * as Style from "../../styles";
 import ShowItem from "../ShowItem/ShowItem";
-import { MoviesType } from "./../../pages/recommendation";
+import { MoviesType } from "./../../utils/types";
 
 const ScrollWraper = styled(InfiniteScroll_)`
   flex-wrap: wrap;

@@ -1,5 +1,5 @@
 import axios from "axios";
-const key = process.env.NEXT_SERVER_API_KEY;
+const key = process.env.NEXT_STATIC_API_KEY;
 const baseURL = "https://api.themoviedb.org";
 import { MoviesType } from "./../utils/types";
 
@@ -26,7 +26,7 @@ export const fetchMoviesGenres = () => {
 
 interface ParamsType {
   with_genres?: string;
-  primary_release_year?: string;
+  primary_release_year?: string | number;
   page?: number;
 }
 export const fetchCustomData = (url: string, params: ParamsType) => {

@@ -7,7 +7,7 @@ import { AppContext } from "../_app";
 import DynamicInfiniteScroll from "../../components/InfiniteScroll";
 import { fetchCustomData } from "../../services";
 import { H2 } from "../../styles";
-import { MoviesType } from "./../../pages/recommendation";
+import { MoviesType } from "./../../utils/types";
 
 const Genrer: React.FC<{}> = () => {
   const router = useRouter();
