@@ -18,7 +18,7 @@ describe("App", () => {
   test("should render APP", async () => {
     let wrapper;
     await act(async () => {
-      wrapper = render(<Home />);
+      wrapper = render(<Home initialMovies={[]} initialPage={1} />);
     });
     expect(wrapper.getByText("Select by genre:")).toBeInTheDocument();
   });

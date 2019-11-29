@@ -1,4 +1,5 @@
 import React from "react";
+import { NextPage } from "next";
 import Layout from "../components/Layout/Layout";
 import GenrerList from "../components/GenrerList/GenrerList";
 import { AppContext } from "./_app";
@@ -7,10 +8,15 @@ import DynamicInfiniteScroll from "../components/InfiniteScroll";
 import { H2 } from "../styles";
 import { MoviesType } from "./../utils/types";
 
-const Home: React.FC<{}> = () => {
-  const [page, setPage] = React.useState<number>(1);
+interface Home {
+  initialMovies: MoviesType[];
+  initialPage: number;
+}
+
+const Home: NextPage<Home> = ({ initialMovies, initialPage }) => {
+  const [page, setPage] = React.useState<number>(initialPage + 1);
   const { genres } = React.useContext(AppContext);
-  const [movies, setMovies] = React.useState<MoviesType[]>([]);
+  const [movies, setMovies] = React.useState<MoviesType[]>(initialMovies);
 
   const fetchMore = async () => {
     try {
@@ -37,6 +43,12 @@ const Home: React.FC<{}> = () => {
       </div>
     </Layout>
   );
+};
+
+Home.getInitialProps = async () => {
+  const initialPage = 1;
+  const initialMovies = await fetchMovies(initialPage);
+  return { initialMovies, initialPage };
 };
 
 export default Home;

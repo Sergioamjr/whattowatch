@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouter } from "next/router";
+import { NextPage, NextPageContext } from "next";
 import _get from "lodash/get";
 import Layout from "../../components/Layout/Layout";
 import GenrerList from "../../components/GenrerList/GenrerList";
@@ -9,31 +9,28 @@ import { fetchCustomData } from "../../services";
 import { H2 } from "../../styles";
 import { MoviesType } from "./../../utils/types";
 
-const Genrer: React.FC<{}> = () => {
-  const router = useRouter();
-  const id = _get(router, "query.id");
-  const [totalPages, setTotalPages] = React.useState<number>(0);
+interface GenrerType {
+  initialMovies: MoviesType[];
+  totalPages: number;
+  id: string;
+}
+
+const Genrer: NextPage<GenrerType> = ({ initialMovies, totalPages, id }) => {
   const [page, setPage] = React.useState<number>(1);
   const [items, setItems] = React.useState<MoviesType[]>([]);
   const { genres } = React.useContext(AppContext);
 
   React.useEffect(() => {
-    setItems([]);
-    setPage(1);
-    setTotalPages(0);
-    fetchMore();
-  }, [id]);
+    setItems(initialMovies);
+    setPage(2);
+  }, [initialMovies]);
 
   const fetchMore = async () => {
     try {
-      const { results, total_pages: totalPages } = await fetchCustomData(
-        "3/discover/movie",
-        {
-          with_genres: id,
-          page
-        }
-      );
-      setTotalPages(totalPages);
+      const { results } = await fetchCustomData("3/discover/movie", {
+        with_genres: id,
+        page
+      });
       setItems(items.concat(results));
       setPage(page + 1);
     } catch (error) {}
@@ -54,6 +51,20 @@ const Genrer: React.FC<{}> = () => {
       </div>
     </Layout>
   );
+};
+
+interface Context extends GenrerType, NextPageContext {}
+
+Genrer.getInitialProps = async (ctx: Context) => {
+  const id = ctx.query.id.toString();
+  const {
+    results: initialMovies,
+    total_pages: totalPages
+  } = await fetchCustomData("3/discover/movie", {
+    with_genres: id,
+    page: 1
+  });
+  return { initialMovies, totalPages, id };
 };
 
 export default Genrer;
